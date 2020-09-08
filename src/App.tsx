@@ -1,25 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Question from "./Components/Questions";
+const  App = () =>{
+  const start = async ()=>{
 
-function App() {
+  }
+  const checkAnswer = (e:React.MouseEvent<HTMLButtonElement>)=>{
+
+  }
+
+  const nextQuestion = ()=>{
+
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <h1>REACT QUIZ</h1>
+        <button onClick={start} className='start'>Start</button>
+        <p className='score'>Score:</p>
+          <p>Loading questions...</p>
+          <Question/>
+          <button className='next' onClick={nextQuestion}>Next Questiong</button>
+      </div>
   );
 }
 

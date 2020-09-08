@@ -1,0 +1,40 @@
+{
+  "env": {
+    "browser": true,
+    "jest": true,
+    "es6": true
+  },
+  "plugins": ["import"],
+  "extends": "eslint:recommended",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "rules": {
+    "no-console": "error",
+    "no-eval": "error",
+    "import/first": "error",
+    "no-useless-escape": "error",
+    "no-script-url": "error",
+    "jsx-a11y/anchor-has-content": "error",
+    "jsx-a11y/href-no-hash": "off",
+    "jsx-a11y/anchor-is-valid": "error",
+    "no-template-curly-in-string": "error",
+    "react/prop-types": "error",
+    "react/prefer-stateless-function": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "linebreak-style": "error",
+    "react/jsx-wrap-multilines": "error",
+    "react/no-danger": "error",
+    "react/forbid-prop-types": "warn",
+    "no-use-before-define": "error",
+    "no-param-reassign": "error",
+    "import/no-unresolved": "off",
+    "react/no-multi-comp": "error",
+    "space-before-blocks": "error",
+    "space-before-function-paren": [
+      "error",
+      "never"
+    ]
+  }
+}
