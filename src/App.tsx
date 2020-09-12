@@ -113,7 +113,9 @@ const App = () => {
               userAnswer={userAnswer ? userAnswer[number] : undefined}
               callback={checkAnswer}
             />
-            <Timer nextQuestion={nextQuestion} reset={reset} />
+             {number !== limit - 1 ? (
+              <Timer nextQuestion={nextQuestion} reset={reset} />
+            ) : null}
           </>
         ) : null}
         {!gameOver &&
