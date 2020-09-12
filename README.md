@@ -1,5 +1,7 @@
 # Quiz-typescript
 
+### [Live](https://beach-quiz.netlify.app/)
+
 ## Available Scripts
 
 In the project directory, you can run:
