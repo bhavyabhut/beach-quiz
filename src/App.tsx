@@ -5,6 +5,7 @@ import { Difficulty, fetchQuestion, QuestionState } from "./api";
 import { GlobalStyle, Wrapper } from "./App.style";
 import Form from "./Components/Form";
 import Timer from "./Components/Timer";
+import Error from "./Components/Error";
 
 export type AnswerObject = {
   question: string;
@@ -23,14 +24,18 @@ const App = () => {
   const [category, setCategory] = useState<string | number>("any");
   const [difficulty, setDifficulty] = useState<Difficulty>(Difficulty.ANY);
   const [reset, setReset] = useState(false);
+  const [error, setError] = useState(false);
   const start = async () => {
     setLoading(true);
     setGameOver(false);
     const newQuestions = await fetchQuestion(limit, difficulty, category);
-    setQuestion(newQuestions);
-    setScore(0);
-    setUserAnswer([]);
-    setNumber(0);
+    if (newQuestions.length === 0) setError(true);
+    else {
+      setQuestion(newQuestions);
+      setScore(0);
+      setUserAnswer([]);
+      setNumber(0);
+    }
     setLoading(false);
   };
 
@@ -80,52 +85,58 @@ const App = () => {
   };
   return (
     <>
-      <GlobalStyle />
-      <Wrapper>
-        <h1>REACT QUIZ</h1>
-        {!gameOver ? (
-          <p className="score">
-            Score:<span style={{ color: "#56ffa4" }}>{score}</span>
-          </p>
-        ) : null}
-        {gameOver || userAnswer.length === limit ? (
-          <>
-            <Form
-              limitChange={changeLimit}
-              categoryChange={changeCategory}
-              difficultlyChange={changeDifficulty}
-              category={category}
-              limit={limit}
-              difficulty={difficulty}
-            />
-            <button onClick={start} className="start">
-              Start
-            </button>
-          </>
-        ) : null}
-        {loading && <Loading />}
-        {!loading && !gameOver && number !== limit ? (
-          <>
-            <Question
-              questionNum={number + 1}
-              totalQuestions={limit}
-              question={questions[number].question}
-              answer={questions[number].answers}
-              userAnswer={userAnswer ? userAnswer[number] : undefined}
-              callback={checkAnswer}
-            />
-            <Timer nextQuestion={nextQuestion} reset={reset} />
-          </>
-        ) : null}
-        {!gameOver &&
-        !loading &&
-        userAnswer.length === number + 1 &&
-        number !== limit - 1 ? (
-          <button className="next" onClick={nextQuestion}>
-            Next Question
-          </button>
-        ) : null}
-      </Wrapper>
+      {error ? (
+        <Error />
+      ) : (
+        <>
+          <GlobalStyle />
+          <Wrapper>
+            <h1>REACT QUIZ</h1>
+            {!gameOver ? (
+              <p className="score">
+                Score:<span style={{ color: "#56ffa4" }}>{score}</span>
+              </p>
+            ) : null}
+            {gameOver || userAnswer.length === limit ? (
+              <>
+                <Form
+                  limitChange={changeLimit}
+                  categoryChange={changeCategory}
+                  difficultlyChange={changeDifficulty}
+                  category={category}
+                  limit={limit}
+                  difficulty={difficulty}
+                />
+                <button onClick={start} className="start">
+                  Start
+                </button>
+              </>
+            ) : null}
+            {loading && <Loading />}
+            {!loading && !gameOver && number !== limit ? (
+              <>
+                <Question
+                  questionNum={number + 1}
+                  totalQuestions={limit}
+                  question={questions[number].question}
+                  answer={questions[number].answers}
+                  userAnswer={userAnswer ? userAnswer[number] : undefined}
+                  callback={checkAnswer}
+                />
+                <Timer nextQuestion={nextQuestion} reset={reset} />
+              </>
+            ) : null}
+            {!gameOver &&
+            !loading &&
+            userAnswer.length === number + 1 &&
+            number !== limit - 1 ? (
+              <button className="next" onClick={nextQuestion}>
+                Next Question
+              </button>
+            ) : null}
+          </Wrapper>
+        </>
+      )}
     </>
   );
 };
