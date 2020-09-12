@@ -21,7 +21,6 @@ const Form: React.FC<FormProps> = ({
       <label>Number of Questions:</label>
       <input
         type="number"
-        name="trivia_amount"
         className="form-control"
         min="1"
         max="50"
@@ -31,7 +30,6 @@ const Form: React.FC<FormProps> = ({
       <br />
       <label>Select Category: </label>
       <select
-        name="trivia_category"
         className="form-control "
         onChange={categoryChange}
         value={category}

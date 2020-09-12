@@ -21,7 +21,7 @@ const App = () => {
   const [gameOver, setGameOver] = useState(true);
   const [limit, setLimit] = useState(10);
   const [category, setCategory] = useState<string | number>("any");
-  const [difficulty, setDifficulty] = useState<Difficulty>(Difficulty.HARD);
+  const [difficulty, setDifficulty] = useState<Difficulty>(Difficulty.ANY);
   const [reset, setReset] = useState(false);
   const start = async () => {
     setLoading(true);
@@ -73,7 +73,8 @@ const App = () => {
     if (
       Difficulty.HARD === value.target.value ||
       Difficulty.EASY === value.target.value ||
-      Difficulty.MEDIUM === value.target.value
+      Difficulty.MEDIUM === value.target.value ||
+      Difficulty.ANY === value.target.value
     )
       setDifficulty(value.target.value);
   };

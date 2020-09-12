@@ -15,6 +15,7 @@ export enum Difficulty {
   EASY = "easy",
   MEDIUM = "medium",
   HARD = "hard",
+  ANY = "any",
 }
 type Res = {
   data: any;
@@ -25,8 +26,12 @@ export const fetchQuestion = async (
   category: number | string
 ) => {
   let endpoint;
-  if (typeof category === "string")
+  if (typeof isNaN(+category) && diff === Difficulty.ANY)
+    endpoint = `https://opentdb.com/api.php?amount=${amount}&type=multiple`;
+  else if (isNaN(+category))
     endpoint = `https://opentdb.com/api.php?amount=${amount}&difficulty=${diff}&type=multiple`;
+  else if (diff === Difficulty.ANY)
+    endpoint = `https://opentdb.com/api.php?amount=${amount}&category=${category}&type=multiple`;
   else
     endpoint = `https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${diff}&type=multiple`;
   const response: Res = await axios.get(endpoint);
