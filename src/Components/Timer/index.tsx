@@ -23,7 +23,7 @@ const Timer: React.FC<TimerProps> = ({ reset, nextQuestion }) => {
   useEffect(() => {
     if (reset) setTimer(TIMER);
     else startTimer(timer);
-  }, [timer, reset]);
+  }, [startTimer, timer, reset]);
 
   return <h3 className="mt-3">0:{timer}</h3>;
 };

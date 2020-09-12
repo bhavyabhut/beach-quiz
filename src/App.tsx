@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, useEffect } from "react";
+import React, { ChangeEvent, useState } from "react";
 import Question from "./Components/Questions";
 import Loading from "./Components/Loading";
 import { Difficulty, fetchQuestion, QuestionState } from "./api";
