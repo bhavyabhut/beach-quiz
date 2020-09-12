@@ -1,21 +1,41 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 
-const Form = () => {
+type FormProps = {
+  limitChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  limit: number;
+  categoryChange: (event: ChangeEvent<HTMLSelectElement>) => void;
+  category: string | number;
+  difficultlyChange: (event: ChangeEvent<HTMLSelectElement>) => void;
+  difficulty: string;
+};
+const Form: React.FC<FormProps> = ({
+  limitChange,
+  categoryChange,
+  difficultlyChange,
+  limit,
+  category,
+  difficulty,
+}) => {
   return (
     <form>
       <label>Number of Questions:</label>
       <input
         type="number"
         name="trivia_amount"
-        id="trivia_amount"
         className="form-control"
         min="1"
         max="50"
-        value="10"
+        value={limit}
+        onChange={limitChange}
       />
       <br />
       <label>Select Category: </label>
-      <select name="trivia_category" className="form-control">
+      <select
+        name="trivia_category"
+        className="form-control "
+        onChange={categoryChange}
+        value={category}
+      >
         <option value="any">Any Category</option>
         <option value="9">General Knowledge</option>
         <option value="10">Entertainment: Books</option>
@@ -44,7 +64,12 @@ const Form = () => {
       </select>
       <br />
       <label>Select Difficulty: </label>
-      <select name="trivia_difficulty" className="form-control">
+      <select
+        name="trivia_difficulty"
+        className="form-control"
+        onChange={difficultlyChange}
+        value={difficulty}
+      >
         <option value="any">Any Difficulty</option>
         <option value="easy">Easy</option>
         <option value="medium">Medium</option>
